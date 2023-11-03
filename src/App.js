@@ -1,10 +1,10 @@
 
 import './App.css';
 
-const Person = () => {
+const Person = (N, L, A) => {
   return(
     <>
-    <h1>Name : Shuban</h1>
+    <h1>Name : " "</h1>
     <h2>Last Name : Iyer</h2>
     <h3>Age : 17</h3>
     </>
@@ -12,11 +12,13 @@ const Person = () => {
 }
 
 const App = () => {
-  const name = 'Shuban';
-  const isNameShowing = true;
   return (
     <div className="App">
-      <h1> Hello, {isNameShowing ? name : 'Error' }</h1>
+      <label> 
+        Your first name : <input Personf= "myInput" />
+        Your last name : <input Personl = "myInput2"/>
+        Your age : <input Persona = "myInput3" />
+      </label>
       <Person />
     </div>
   );

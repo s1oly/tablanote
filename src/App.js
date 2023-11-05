@@ -1,25 +1,26 @@
 
 import './App.css';
+import React, { useState } from 'react';
 
-const Person = (N, L, A) => {
-  return(
-    <>
-    <h1>Name : " "</h1>
-    <h2>Last Name : Iyer</h2>
-    <h3>Age : 17</h3>
-    </>
-  )
-}
 
 const App = () => {
+  const [taal, setTaal] = useState('TeenTaal')
+  const sayTaal = () => {
+    alert(taal)
+  }
+  const change = (event) => {
+    setTaal(event.target.value)
+  }
+  
+
   return (
     <div className="App">
-      <label> 
-        Your first name : <input Personf= "myInput" />
-        Your last name : <input Personl = "myInput2"/>
-        Your age : <input Persona = "myInput3" />
-      </label>
-      <Person />
+      <input 
+      onChange = {change}
+      value = {taal}>
+      </input>
+      <br></br>
+      <button onClick = {sayTaal}> Current Taal</button>
     </div>
   );
 }

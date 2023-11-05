@@ -4,23 +4,42 @@ import React, { useState } from 'react';
 
 
 const App = () => {
-  const [taal, setTaal] = useState('TeenTaal')
-  const sayTaal = () => {
-    alert(taal)
+  const [taal, setTaal] = useState(' ')
+  const [bpm, setBpm] = useState(0)
+  const [name, setName] = useState(' ')
+  const sayKayeda = () => {
+    alert(taal + " " + bpm + " " + name)
   }
-  const change = (event) => {
+  const changeTaal = (event) => {
     setTaal(event.target.value)
   }
-  
+  const changeBPM = (event) =>{
+    setBpm(event.target.value)
+  }
+  const changeName = (event) =>{
+    setName(event.target.value)
+  }
 
   return (
     <div className="App">
+      <h1>Input Kayeda Details Below</h1>
+      <br></br>
       <input 
-      onChange = {change}
+      onChange = {changeTaal}
       value = {taal}>
       </input>
       <br></br>
-      <button onClick = {sayTaal}> Current Taal</button>
+      <input
+      onChange = {changeBPM}
+      value = {bpm}>
+      </input>
+      <br></br>
+      <input
+      onChange = {changeName}
+      value = {name}>
+      </input>
+      <br></br>
+      <button onClick = {sayKayeda}> Current Kayeda</button>
     </div>
   );
 }

@@ -1,21 +1,17 @@
+// Compositions.js
+import React from 'react';
 
-import React, { useState } from 'react';
-import './Compositions.css';
-
-const Compositions = () => {
-    const [compositions, setCompositions] = useState([]);
-    const addComposition = (newComposition) => {
-        setCompositions(compositions.push(newComposition))
-    }
-
-    return (
-        <div>
-            <h2>List of Compositions</h2>
-            <ul>
-                {compositions.map((compositions,index) => (
-                    <li key = {index}> compositions</li>
-                ))}
-            </ul>
-        </div>
-    );
+function Compositions({ compositions }) {
+  return (
+    <div>
+      <h2>List of Compositions</h2>
+      <ul>
+        {compositions.map((composition, index) => (
+          <li key={index}>{composition}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
+
+export default Compositions;

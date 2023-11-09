@@ -1,7 +1,9 @@
 // Compositions.js
-import React from 'react';
+import React, {useContext} from 'react';
+import { CompositionsContext } from './CreateComposition'
 
-function Compositions({ compositions }) {
+function Compositions() {
+  const compositions = useContext(CompositionsContext);
   return (
     <div>
       <h2>List of Compositions</h2>

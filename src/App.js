@@ -9,6 +9,8 @@ const App = () => {
       <h1>Add a Composition or View Exisiting Compositions</h1>
       <BrowserRouter>
       <Routes>
+          <Route index element = {<Compositions/>} />
+          <Route index element = {<CreateComposition />} />
           <Route path="/createcomposition" element={<CreateComposition />} />
           <Route path="/compositions" element={<Compositions />} />
       </Routes>

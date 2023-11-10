@@ -2,6 +2,7 @@
 import React, {useContext} from 'react';
 import { CompositionsContext } from './CreateComposition'
 
+//Fix the display
 function Compositions() {
   const compositions = useContext(CompositionsContext);
   return (
@@ -17,3 +18,4 @@ function Compositions() {
 }
 
 export default Compositions;
+

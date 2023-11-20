@@ -1,4 +1,6 @@
 import React, { useState, createContext } from 'react';
+import {Link} from 'react-router-dom';
+import Compositions from './Compositions';
 
 export const CompositionsContext = createContext([]);
 
@@ -37,6 +39,8 @@ const CreateComposition = () =>{
       <div>
         <h1>Input Kayeda Details Below</h1>
         <br></br>
+        <Link to = '/createcomposition' className = 'btn'> Create Composition</Link>
+        <br></br>
         <label> Taal 
             <input onChange={changeTaal} value={taal}></input>
         </label>
@@ -52,6 +56,7 @@ const CreateComposition = () =>{
         <button onClick={sayKayeda}>Current Kayeda</button>
         <button onClick={addNewComposition}>Add Composition</button>
       </div>
+      <Compositions/>
     </CompositionsContext.Provider>
     );
 }

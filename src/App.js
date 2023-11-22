@@ -1,11 +1,12 @@
 import './App.css';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
-import Compositions from './Compositions'; // Import the Compositions component
-import CreateComposition from './CreateComposition'
+import Compositions from './Pages/Compositions'; // Import the Compositions component
+import CreateComposition from './Pages/CreateComposition'
 
 const App = () => {
   return (
     <div className="App">
+      <title>TablaNote</title>
       <h1>Add a Composition or View Exisiting Compositions</h1>
       <BrowserRouter>
       <Routes>

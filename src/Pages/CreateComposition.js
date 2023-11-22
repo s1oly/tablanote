@@ -9,7 +9,7 @@ const CreateComposition = () =>{
     const [bpm, setBpm] = useState('');
     const [name, setName] = useState('');
   
-    const [compositions, setCompositions] = useState([]); // Store compositions in the App component
+    const [compositions, setCompositions] = useState(['']); 
   
     const sayKayeda = () => {
       alert(taal + " " + bpm + " " + name);
@@ -36,30 +36,31 @@ const CreateComposition = () =>{
     }
     return (
     <CompositionsContext.Provider value={compositions}>
-      <div>
         <h1>Input Kayeda Details Below</h1>
         <br></br>
-        <Link to = '/createcomposition' className = 'btn'> Create Composition</Link>
         <br></br>
-        <label> Taal 
+        <label> <b>Taal</b>&nbsp; 
             <input onChange={changeTaal} value={taal}></input>
         </label>
         <br></br>
-        <label> BPM
+        <label> <b>BPM</b>&nbsp; 
             <input onChange={changeBPM} value={bpm}></input>
         </label>
         <br></br>
-        <label> Name
+        <label> <b>Name</b>&nbsp; 
             <input onChange={changeName} value={name}></input>
         </label>
-        <br></br>
+        <p></p>
         <button onClick={sayKayeda}>Current Kayeda</button>
+        &nbsp; 
         <button onClick={addNewComposition}>Add Composition</button>
-      </div>
-      <Compositions/>
+        <br></br>
+        <Link to = '/compositions' className = 'btn'><h1>Compositions</h1></Link>
+        <Compositions/>
     </CompositionsContext.Provider>
     );
 }
+
 
 export default CreateComposition;
 

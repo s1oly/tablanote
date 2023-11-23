@@ -1,5 +1,7 @@
-.NavBar {
+.navBar {
     display: flex;
     justify-content: space-around; /* Adjust as needed */
     align-items: center; /* Align items vertically in the center */
 }
+
+

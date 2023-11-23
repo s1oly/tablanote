@@ -7,8 +7,8 @@ import { CompositionsContext } from './CreateComposition'
 const Compositions = () => {
   const compositions = useContext(CompositionsContext);
   return (
-    <div>
-       <Link to = '/createcomposition' className = 'btn'><h1>Create Compositions</h1></Link>
+    <CompositionsContext.Provider value = {compositions}>
+       <Link to = '/' className = 'btn'><h1>Home</h1></Link>
        <p></p>
       <h2>List of Compositions</h2>
       <ul>
@@ -16,9 +16,9 @@ const Compositions = () => {
           <li key={index}>{composition}</li>
         ))}
       </ul>
-    </div>
+    </CompositionsContext.Provider>
   );
-}
+};
 
 export default Compositions;
 

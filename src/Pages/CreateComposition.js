@@ -1,15 +1,14 @@
 import React, { useState, createContext } from 'react';
 import {Link} from 'react-router-dom';
-import Compositions from './Compositions';
 
-export const CompositionsContext = createContext([]);
+const CompositionsContext = createContext([' No Compositions Currently']);
 
 const CreateComposition = () =>{
     const [taal, setTaal] = useState('');
     const [bpm, setBpm] = useState('');
     const [name, setName] = useState('');
   
-    const [compositions, setCompositions] = useState(['']); 
+    const [compositions, setCompositions] = useState([]); 
   
     const sayKayeda = () => {
       alert(taal + " " + bpm + " " + name);
@@ -29,14 +28,16 @@ const CreateComposition = () =>{
   
     const addNewComposition = () => {
       const newComposition = `${taal} ${bpm} ${name}`;
-      setCompositions([...compositions, newComposition]); 
+      setCompositions([...compositions, newComposition]);
       setTaal('');
       setBpm('');
       setName('');
+      
     }
+
     return (
     <CompositionsContext.Provider value={compositions}>
-        <h1>Input Kayeda Details Below</h1>
+        <h2>Input Kayeda Details Below</h2>
         <br></br>
         <br></br>
         <label> <b>Taal</b>&nbsp; 
@@ -55,12 +56,11 @@ const CreateComposition = () =>{
         &nbsp; 
         <button onClick={addNewComposition}>Add Composition</button>
         <br></br>
-        <Link to = '/compositions' className = 'btn'><h1>Compositions</h1></Link>
-        <Compositions/>
+        <Link to = '/' className = 'btn'><h2>Home</h2></Link>
     </CompositionsContext.Provider>
     );
 }
 
-
+export {CompositionsContext};
 export default CreateComposition;
 

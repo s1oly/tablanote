@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
+
 
 const About = () =>{
     return(
         <div>
-            <Link to ='/' className="btn"><h2>Back Home</h2></Link>
             <p/>
             <h2> About</h2>
         <p>

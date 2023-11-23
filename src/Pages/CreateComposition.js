@@ -1,5 +1,4 @@
 import React, { useState, createContext } from 'react';
-import {Link} from 'react-router-dom';
 
 const CompositionsContext = createContext([' No Compositions Currently']);
 
@@ -8,7 +7,7 @@ const CreateComposition = () =>{
     const [bpm, setBpm] = useState('');
     const [name, setName] = useState('');
   
-    const [compositions, setCompositions] = useState([]); 
+    const [compositions, setCompositions] = useState(['']); 
   
     const sayKayeda = () => {
       alert(taal + " " + bpm + " " + name);
@@ -28,7 +27,7 @@ const CreateComposition = () =>{
   
     const addNewComposition = () => {
       const newComposition = `${taal} ${bpm} ${name}`;
-      setCompositions([...compositions, newComposition]);
+      setCompositions(compositions => [...compositions, newComposition]);
       setTaal('');
       setBpm('');
       setName('');
@@ -56,7 +55,6 @@ const CreateComposition = () =>{
         &nbsp; 
         <button onClick={addNewComposition}>Add Composition</button>
         <br></br>
-        <Link to = '/' className = 'btn'><h2>Home</h2></Link>
     </CompositionsContext.Provider>
     );
 }

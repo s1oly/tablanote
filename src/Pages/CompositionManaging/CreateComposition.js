@@ -1,12 +1,13 @@
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
+import { CompositionsContext } from './Contexts/CompositionContext';
+import Compositions from './Compositions';
 
-
-const CompositionsContext = createContext([' No Compositions Currently']);
 
 const CreateComposition = () =>{
     const [taal, setTaal] = useState('');
     const [bpm, setBpm] = useState('');
     const [name, setName] = useState('');
+    const [indexVal, setIndexVal] = useState()
   
     const [compositions, setCompositions] = useState([]); 
   
@@ -25,14 +26,24 @@ const CreateComposition = () =>{
     const changeName = (event) => {
       setName(event.target.value);
     }
+
+    const changeIndexVal = (event) => {
+        setIndexVal(event.target.value -1)
+    }
   
     const addNewComposition = () => {
       const newComposition = `${taal} ${bpm} ${name}`;
-      setCompositions(compositions => [...compositions, newComposition]);
+      setCompositions(compositions => [...compositions, newComposition]); 
       setTaal('');
       setBpm('');
       setName('');
       
+    }
+
+    const deleteComposition = () => {
+      const updatedComposition = compositions.filter((_, index) => index !== indexVal);
+      setCompositions(updatedComposition);
+      setIndexVal();
     }
 
     return (
@@ -55,7 +66,13 @@ const CreateComposition = () =>{
         <button onClick={sayKayeda}>Current Kayeda</button>
         &nbsp; 
         <button onClick={addNewComposition}>Add Composition</button>
-        <br></br>
+        <p></p>
+        <label> <b>Which Composition do you Want to Delete</b>&nbsp; 
+            <input onChange={changeIndexVal} value={indexVal}></input>
+        </label>
+        &nbsp;
+        <button onClick={deleteComposition}>Delete Composition</button>
+        <Compositions/>
     </CompositionsContext.Provider>
     );
 }

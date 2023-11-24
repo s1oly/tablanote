@@ -6,16 +6,15 @@ import { CompositionsContext } from './CreateComposition'
 const Compositions = () => {
   const compositions = useContext(CompositionsContext);
   return (
-    <div>
-
-       <p></p>
+    <>
         <h2>List of Compositions</h2>
+        <h2>{compositions.length}</h2>
         <ul>
           {compositions.map((composition, index) => (
            <li key={index}>{composition}</li>
           ))}
         </ul>
-    </div>
+    </>
   );
 };
 

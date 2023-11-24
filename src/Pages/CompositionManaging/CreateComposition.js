@@ -1,5 +1,6 @@
 import React, { useState, createContext } from 'react';
 
+
 const CompositionsContext = createContext([' No Compositions Currently']);
 
 const CreateComposition = () =>{
@@ -7,7 +8,7 @@ const CreateComposition = () =>{
     const [bpm, setBpm] = useState('');
     const [name, setName] = useState('');
   
-    const [compositions, setCompositions] = useState(['']); 
+    const [compositions, setCompositions] = useState([]); 
   
     const sayKayeda = () => {
       alert(taal + " " + bpm + " " + name);
@@ -58,6 +59,7 @@ const CreateComposition = () =>{
     </CompositionsContext.Provider>
     );
 }
+
 
 export {CompositionsContext};
 export default CreateComposition;

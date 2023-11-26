@@ -11,9 +11,13 @@ import {createContext, useContext, useState} from 'react';
         setCompositions(compositions => compositions.concat(newComposition));
     }
 
+    const deleteComposition = (indexValue) => {
+        setCompositions(compositions => compositions.filter((_,index) => index !== indexValue   ))
+    }
+
 
     return (
-        <CompositionsContext.Provider value={{addNewComposition, compositions}}>
+        <CompositionsContext.Provider value={{addNewComposition, compositions, deleteComposition}}>
             {children}
         </CompositionsContext.Provider>
     )

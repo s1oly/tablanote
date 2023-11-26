@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { CompositionsContext } from './Contexts/CompositionContext';
-import Compositions from './Compositions';
+import { useCompositions } from './Contexts/CompositionContextProvider';
 
 
 const CreateComposition = () =>{
+    const {addNewComposition} = useCompositions();
     const [taal, setTaal] = useState('');
     const [bpm, setBpm] = useState('');
     const [name, setName] = useState('');
-    const [indexVal, setIndexVal] = useState()
-  
-    const [compositions, setCompositions] = useState([]); 
   
     const sayKayeda = () => {
       alert(taal + " " + bpm + " " + name);
@@ -27,27 +24,19 @@ const CreateComposition = () =>{
       setName(event.target.value);
     }
 
-    const changeIndexVal = (event) => {
-        setIndexVal(event.target.value -1)
-    }
   
-    const addNewComposition = () => {
+    const addNewCompositionHandler = () => {
       const newComposition = `${taal} ${bpm} ${name}`;
-      setCompositions(compositions => [...compositions, newComposition]); 
+      addNewComposition(newComposition)
       setTaal('');
       setBpm('');
       setName('');
       
     }
 
-    const deleteComposition = () => {
-      const updatedComposition = compositions.filter((_, index) => index !== indexVal);
-      setCompositions(updatedComposition);
-      setIndexVal();
-    }
 
     return (
-    <CompositionsContext.Provider value={compositions}>
+    <>
         <h2>Input Kayeda Details Below</h2>
         <br></br>
         <br></br>
@@ -65,19 +54,12 @@ const CreateComposition = () =>{
         <p></p>
         <button onClick={sayKayeda}>Current Kayeda</button>
         &nbsp; 
-        <button onClick={addNewComposition}>Add Composition</button>
+        <button onClick={addNewCompositionHandler}>Add Composition</button>
         <p></p>
-        <label> <b>Which Composition do you Want to Delete</b>&nbsp; 
-            <input onChange={changeIndexVal} value={indexVal}></input>
-        </label>
-        &nbsp;
-        <button onClick={deleteComposition}>Delete Composition</button>
-        <Compositions/>
-    </CompositionsContext.Provider>
+    </>
     );
 }
 
 
-export {CompositionsContext};
 export default CreateComposition;
 

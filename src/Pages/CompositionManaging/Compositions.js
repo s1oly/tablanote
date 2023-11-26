@@ -1,10 +1,14 @@
 // Compositions.js
-import React, {useContext} from 'react';
-import { CompositionsContext } from './CreateComposition'
+import React from 'react';
+import { useCompositions } from './Contexts/CompositionContextProvider';
 
 //Fix the display
 const Compositions = () => {
-  const compositions = useContext(CompositionsContext);
+  const {compositions} = useCompositions();
+
+  const deleteComposition = (indexValue) => {
+    compositions.filter((_,index) => index !== indexValue)
+  }
 
   return (
     <>
@@ -13,7 +17,7 @@ const Compositions = () => {
         <ul>
           {compositions.map((composition, index) => (
           <>
-            <li key={index}>{composition} &nbsp; </li>
+            <li key={index}>{composition} &nbsp; <button onClick = {deleteComposition(index)}> Delete Composition</button> </li>
            </>
           ))}
         </ul>

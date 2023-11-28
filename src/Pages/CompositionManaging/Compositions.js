@@ -2,6 +2,7 @@
 import React from 'react';
 import { useCompositions } from './Contexts/CompositionContextProvider';
 import TeentaalPDF from '/Users/s1oly/Desktop/tablanote/src/PDFs/Teentaal.pdf'
+import JhaptaalPDF from '/Users/s1oly/Desktop/tablanote/src/PDFs/Jhaptaal.pdf'
 
 //Fix the display
 const Compositions = () => {
@@ -17,7 +18,7 @@ const Compositions = () => {
             <li key={index}>{composition} &nbsp; 
               <button onClick = {() => deleteComposition(index)}> Delete Composition</button> 
               <p>
-                <a href= {TeentaalPDF} target = "_blank" rel="norefferer"> Link To Composition</a>
+                <a href= {composition.includes('Teentaal') ? TeentaalPDF : JhaptaalPDF} target = "_blank" rel="norefferer"> Link To Composition</a>
               </p>
             </li>
            </>

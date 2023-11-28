@@ -1,7 +1,7 @@
 // Compositions.js
 import React from 'react';
 import { useCompositions } from './Contexts/CompositionContextProvider';
-import pdf1 from '/Users/s1oly/Desktop/tablanote/src/PDFs/First_PDF.pdf'
+import TeentaalPDF from '/Users/s1oly/Desktop/tablanote/src/PDFs/Teentaal.pdf'
 
 //Fix the display
 const Compositions = () => {
@@ -17,7 +17,7 @@ const Compositions = () => {
             <li key={index}>{composition} &nbsp; 
               <button onClick = {() => deleteComposition(index)}> Delete Composition</button> 
               <p>
-                <a href= {pdf1} target = "_blank" rel="nonrefferer"> Link To Composition</a>
+                <a href= {TeentaalPDF} target = "_blank" rel="norefferer"> Link To Composition</a>
               </p>
             </li>
            </>

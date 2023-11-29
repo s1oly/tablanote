@@ -1,8 +1,8 @@
 // Compositions.js
 import React from 'react';
 import { useCompositions } from './Contexts/CompositionContextProvider';
-import TeentaalPDF from '/Users/s1oly/Desktop/tablanote/src/PDFs/Teentaal.pdf'
-import JhaptaalPDF from '/Users/s1oly/Desktop/tablanote/src/PDFs/Jhaptaal.pdf'
+import TeentaalPDF from '/Users/s1oly/Desktop/tablanote/src/PDFs/TeentaalE.pdf'
+import JhaptaalPDF from '/Users/s1oly/Desktop/tablanote/src/PDFs/JhaptaalE.pdf'
 
 //Fix the display
 const Compositions = () => {

@@ -18,7 +18,7 @@ const Compositions = () => {
             <li key={index}>{composition} &nbsp; 
               <button onClick = {() => deleteComposition(index)}> Delete Composition</button> 
               <p>
-                <a href= {composition.includes('Teentaal') ? TeentaalPDF : JhaptaalPDF} target = "_blank" rel="norefferer"> Link To Composition</a>
+                <a href= {composition.includes('Teentaal') ? TeentaalPDF : JhaptaalPDF} target = "_blank" rel="noreferrer"> Link To Composition</a>
               </p>
             </li>
            </>

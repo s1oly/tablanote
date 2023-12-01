@@ -4,4 +4,10 @@
     border: 1px solid;
     word-wrap: break-word;
     display: flex;
+    font-size: small;
+}
+
+.image{
+    height: auto;
+    max-width: 100;
 }

@@ -4,6 +4,12 @@ import { useCompositions } from './Contexts/CompositionContextProvider';
 import TeentaalPDF from '/Users/s1oly/Desktop/tablanote/src/PDFs/TeentaalE.pdf'
 import JhaptaalPDF from '/Users/s1oly/Desktop/tablanote/src/PDFs/JhaptaalE.pdf'
 
+const requireAll = (requireContext) => requireContext.keys().map(requireContext);
+
+const pdfFiles = requireAll(
+  require.context('/Users/s1oly/Desktop/tablanote/src/SavedPDFs/', false, /\.pdf$/)
+);
+
 //Fix the display
 const Compositions = () => {
   const {compositions, deleteComposition} = useCompositions();
@@ -18,7 +24,7 @@ const Compositions = () => {
             <li key={index}>{composition} &nbsp; 
               <button onClick = {() => deleteComposition(index)}> Delete Composition</button> 
               <p>
-                <a href= {composition.includes('Teentaal') ? TeentaalPDF : JhaptaalPDF} target = "_blank" rel="noreferrer"> Link To Composition</a>
+                <a href= {(pdfFiles.lentgh ===0) ? (pdfFiles.find((file) => file.includes(composition))) : (composition.includes('Teentaal') ? TeentaalPDF : JhaptaalPDF)} target = "_blank" rel="noreferrer"> Link To Composition</a>
               </p>
             </li>
            </>

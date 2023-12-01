@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './Home.css'
 
 const Home = () => {
-    const image = require('/Users/s1oly/Desktop/tablanote/src/Images/tabla.png')
+    const image = require('../../Images/tabla.png')
     const [openA, setOpenA] = useState(false)
     const [openB, setOpenB] = useState(false)
     const [openC, setOpenC] = useState(false)

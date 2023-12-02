@@ -10,6 +10,19 @@ const pdfFiles = requireAll(
   require.context('../../SavedPDFs/', false, /\.pdf$/)
 );
 
+const getPDFLink = (composition) => {
+  const matchingPDF = pdfFiles.find((file) => file.includes(composition));
+  if (matchingPDF) {
+    return matchingPDF;
+  } else if (composition.includes('Teentaal')) {
+    return TeentaalPDF;
+  } else if (composition.includes('Jhaptaal')) {
+    return JhaptaalPDF;
+  } else {
+    return null; // Return null or a default PDF for unmatched compositions
+  }
+};
+
 //Fix the display
 const Compositions = () => {
   const {compositions, deleteComposition} = useCompositions();
@@ -24,7 +37,7 @@ const Compositions = () => {
             <li key={index}>{composition} &nbsp; 
               <button onClick = {() => deleteComposition(index)}> Delete Composition</button> 
               <p>
-                <a href= {(pdfFiles.length !==0) ? (pdfFiles.find((file) => file.includes(composition))) : (composition.includes('Teentaal') ? TeentaalPDF : JhaptaalPDF)} target = "_blank" rel="noreferrer"> Link To Composition</a>
+                <a href= {getPDFLink(composition)} target = "_blank" rel="noreferrer"> Link To Composition</a>
               </p>
             </li>
            </>

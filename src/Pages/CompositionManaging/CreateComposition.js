@@ -26,7 +26,7 @@ const CreateComposition = () =>{
 
   
     const addNewCompositionHandler = () => {
-      const newComposition = `${taal} ${bpm} ${name}`;
+      const newComposition = `${taal}_${bpm}_${name}`;
       addNewComposition(newComposition)
       setTaal('');
       setBpm('');

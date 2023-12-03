@@ -6,8 +6,9 @@ import '../PopUp/Popup.css'
 const SharedLayout = () =>{
     return(
         <>
-            <Popup className = 'Popup'/>
             <NavBar/>
+            <p></p>
+            <Popup className = 'Popup'/>
             <section className= 'section'>
                 <Outlet/>
             </section>

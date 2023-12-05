@@ -8,7 +8,7 @@ const SharedLayout = () =>{
         <>
             <NavBar/>
             <p></p>
-            <Popup className = 'Popup'/>
+            <Popup/>
             <section className= 'section'>
                 <Outlet/>
             </section>

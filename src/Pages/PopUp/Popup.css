@@ -1,13 +1,13 @@
-.Popup{
+.Popup {
     background-color: white;
-    width: 500px;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
     width: 500px;
+    border-style: dotted;
+}
+
+.closed {
+    border-style: none; /* Hide the border when closed */
 }

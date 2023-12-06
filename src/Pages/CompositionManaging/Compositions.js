@@ -3,6 +3,7 @@ import React from 'react';
 import { useCompositions } from './Contexts/CompositionContextProvider';
 import TeentaalPDF from '../../PDFs/TeentaalE.pdf'
 import JhaptaalPDF from '../../PDFs/JhaptaalE.pdf'
+import EktaalPDF from '../../PDFs/EktaalE.pdf'
 
 const requireAll = (requireContext) => requireContext.keys().map(requireContext);
 
@@ -10,6 +11,7 @@ const pdfFiles = requireAll(
   require.context('../../SavedPDFs/', false, /\.pdf$/)
 );
 
+//Add Ektaal, Rupak, and other taals when there is time
 const getPDFLink = (composition) => {
   const matchingPDF = pdfFiles.find((file) => file.includes(composition));
   if (matchingPDF) {
@@ -18,7 +20,9 @@ const getPDFLink = (composition) => {
     return TeentaalPDF;
   } else if (composition.includes('Jhaptaal')) {
     return JhaptaalPDF;
-  } else {
+  } else if(composition.includes('Ektaal')){
+    return EktaalPDF;
+  }else {
     return null; // Return null or a default PDF for unmatched compositions
   }
 };

@@ -26,7 +26,7 @@ const Home = () => {
                 <button onClick = {toggleA}><h1> Background on Tabla</h1></button>
                 {openA && (
                     <div className='toggle'>
-                        <h4>There are many theories on how tabla was formed. One of the main theories was that it was made to accompany the 
+                        <h4>There are many theories on how tabla was formed. One of these theories was that it was made to accompany the 
                             Khayal Gayaki style of singing, which the pakhawaj wasn't as suited to doing. Since then, the tabla has been split into 
                             many Garana's, each with their own style of playing and school of thought. 
                         </h4>
@@ -39,7 +39,7 @@ const Home = () => {
                         <h4>
                             There are many different compositions that are present in tabla, such as peshkar, paran, gat, kayeda, rela, tukdas and more. 
                             Each of these composition's are played in a specfifc taal, each with their own unique theka and a set amount of beats, or maatras. 
-                            During solo performance, the tabla player has plays a wide variety of compositions at different speeds, or laya. During Accompaniment, 
+                            During solo performance, the tabla player plays a wide variety of compositions at different speeds, or laya. During Accompaniment, 
                             the tabla player usually provides accompaniment to dance, vocal, or instrumental performance in a certain taal. 
                         </h4>
                     </div>
@@ -50,9 +50,9 @@ const Home = () => {
                     <div className='toggle2'>
                         <h4>
                             Once you sign in, you will be shown your existing compositions. You can view them by pressing the link or create a new one based on the taal
-                            you want to play. Currently, only Teentaal and Jhaptaal are supported. We are also working on making sure the pdf's save to any change. After you make
-                            changes to your kayeda, download it with the changes, naming it what you named the composition, and move it to the SavedPDFs folder. After that, your link
-                            will open up the pdf with the changes. You might need to re-create the composition for changes to show after a refresh if not on Safari.  
+                            you want to play. Currently, only Teentaal,Jhaptaal,Ektaal, and Rupak are supported. After you make changes to your kayeda, download it with 
+                            the changes, naming it what you named the composition, and move it to the SavedPDFs folder. After that, your link will open up the pdf with 
+                            the changes. You might need to re-create the composition for changes to show after a refresh if not on Safari.  
                         </h4>
                     </div>
                 )}

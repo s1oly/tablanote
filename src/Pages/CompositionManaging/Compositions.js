@@ -4,6 +4,7 @@ import { useCompositions } from './Contexts/CompositionContextProvider';
 import TeentaalPDF from '../../PDFs/TeentaalE.pdf'
 import JhaptaalPDF from '../../PDFs/JhaptaalE.pdf'
 import EktaalPDF from '../../PDFs/EktaalE.pdf'
+import RupakPDF from '../../PDFs/RupakE.pdf'
 
 const requireAll = (requireContext) => requireContext.keys().map(requireContext);
 
@@ -22,6 +23,8 @@ const getPDFLink = (composition) => {
     return JhaptaalPDF;
   } else if(composition.includes('Ektaal')){
     return EktaalPDF;
+  }else if(composition.includes('Rupak')){
+    return RupakPDF;
   }else {
     return null; // Return null or a default PDF for unmatched compositions
   }

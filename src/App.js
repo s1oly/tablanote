@@ -7,6 +7,7 @@ import About from './Pages/Display/About';
 import Home from './Pages/Display/Home';
 import SharedLayout from './Pages/Layouts/SharedLayout';
 import CompositionContextProvider  from './Pages/CompositionManaging/Contexts/CompositionContextProvider';
+import SignIn from './Pages/PopUp_SignIn/SignIn';
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
       <CompositionContextProvider>
       <Routes> 
           <Route path ="/" element={<SharedLayout/>}>
+            <Route path = "signin" element = {<SignIn/>} />
             <Route path ="home" element={<Home/>}/>
               <Route path="createcomposition" element={<CreateComposition />} />
               <Route path="compositions" element={<Compositions />} />

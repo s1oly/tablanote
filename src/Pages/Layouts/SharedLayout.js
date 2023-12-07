@@ -1,7 +1,7 @@
 import { Outlet} from "react-router-dom";
 import NavBar from '../Display/NavBar';
-import Popup from '../PopUp/Popup'
-import '../PopUp/Popup.css'
+import Popup from '../PopUp_SignIn/Popup'
+import '../PopUp_SignIn/Popup.css'
 
 const SharedLayout = () =>{
     return(

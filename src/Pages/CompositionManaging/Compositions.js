@@ -6,6 +6,7 @@ import JhaptaalPDF from '../../PDFs/JhaptaalE.pdf'
 import EktaalPDF from '../../PDFs/EktaalE.pdf'
 import RupakPDF from '../../PDFs/RupakE.pdf'
 import {db} from '../../Config/firebaseConfig'
+import {collection, addDoc} from 'firebase/firestore'
 
 
 // const addPDFMetaData = async (composition, downloadURL) => {
@@ -49,12 +50,14 @@ const Compositions = () => {
   const { compositions, deleteComposition } = useCompositions();
   const [pdfLinks, setPdfLinks] = useState({});
 
+  const PDFref = collection(db, 'PDFs')
+
   useEffect(() => {
     // Function to retrieve download URLs from Firestore based on composition names
     const getPDFDownloadURLFromFirestore = async (composition) => {
       try {
         const querySnapshot = await db
-          .collection('pdfMetadata')
+          .collection('PDFs')
           .where('composition', '==', composition)
           .get();
 
@@ -98,6 +101,14 @@ const Compositions = () => {
     }
   };
 
+  const onSubmitComposition = async(newCompositionName, newPDFLink) => {
+    try{
+      await addDoc(PDFref, {composition: newCompositionName, downloadURL: newPDFLink})
+    }catch(err){
+      console.error(err)
+    }
+  }
+
   return (
     <>
       <h2>List of Compositions</h2>
@@ -107,6 +118,7 @@ const Compositions = () => {
           <li key={index}>
             {composition} &nbsp;
             <button onClick={() => deleteComposition(index)}>Delete Composition</button>
+            <button onClick = {() => onSubmitComposition(composition, pdfLinks[composition])}> Store Composition </button>
             <p>
               <a href={pdfLinks[composition]} target="_blank" rel="noreferrer">Link To Composition</a>
             </p>

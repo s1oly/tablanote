@@ -1,83 +1,22 @@
 // Compositions.js
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCompositions } from './Contexts/CompositionContextProvider';
-import TeentaalPDF from '../../PDFs/TeentaalE.pdf'
-import JhaptaalPDF from '../../PDFs/JhaptaalE.pdf'
-import EktaalPDF from '../../PDFs/EktaalE.pdf'
-import RupakPDF from '../../PDFs/RupakE.pdf'
-import {db, auth} from '../../Config/firebaseConfig'
-import {collection, addDoc} from 'firebase/firestore'
+import TeentaalPDF from '../../PDFs/TeentaalE.pdf';
+import JhaptaalPDF from '../../PDFs/JhaptaalE.pdf';
+import EktaalPDF from '../../PDFs/EktaalE.pdf';
+import RupakPDF from '../../PDFs/RupakE.pdf';
+import { storage } from '../../Config/firebaseConfig';
+import { ref, getDownloadURL, uploadBytes} from 'firebase/storage';
 
-
-// const addPDFMetaData = async (composition, downloadURL) => {
-//   try {
-//     await db.collection('PDFs').add({
-//       composition: composition, 
-//       downloadURL : downloadURL,
-
-//     });
-//   }catch (error){
-//     console.error(error)
-//   }
-// }
-
-// const requireAll = (requireContext) => requireContext.keys().map(requireContext);
-
-// const pdfFiles = requireAll(
-//   require.context('../../SavedPDFs/', false, /\.pdf$/)
-// );
-
-// //Add Ektaal, Rupak, and other taals when there is time
-// const getPDFLink = (composition) => {
-//   const matchingPDF = pdfFiles.find((file) => file.includes(composition));
-//   if (matchingPDF) {
-//     return matchingPDF;
-//   } else if (composition.includes('Teentaal')) {
-//     return TeentaalPDF;
-//   } else if (composition.includes('Jhaptaal')) {
-//     return JhaptaalPDF;
-//   } else if(composition.includes('Ektaal')){
-//     return EktaalPDF;
-//   }else if(composition.includes('Rupak')){
-//     return RupakPDF;
-//   }else {
-//     return null; // Return null or a default PDF for unmatched compositions
-//   }
-// };
-
-//Fix the display
 const Compositions = () => {
   const { compositions, deleteComposition } = useCompositions();
   const [pdfLinks, setPdfLinks] = useState({});
 
-  const PDFref = collection(db, 'PDFs')
-
   useEffect(() => {
-    // Function to retrieve download URLs from Firestore based on composition names
-    const getPDFDownloadURLFromFirestore = async (composition) => {
-      try {
-        const querySnapshot = await db
-          .collection('PDFs')
-          .where('composition', '==', composition)
-          .get();
-
-        if (!querySnapshot.empty) {
-          const doc = querySnapshot.docs[0]; // Assuming composition names are unique
-          return doc.data().downloadURL;
-        } else {
-          return null; // Composition not found in metadata
-        }
-      } catch (error) {
-        console.error('Error getting PDF download URL from Firestore: ', error);
-        return null;
-      }
-    };
-
-    // Fetch PDF download URLs for each composition and store them in state
     const fetchPDFLinks = async () => {
       const links = {};
       for (const composition of compositions) {
-        const downloadURL = await getPDFDownloadURLFromFirestore(composition);
+        const downloadURL = await getPDFDownloadURLFromStorage(composition);
         links[composition] = downloadURL || getDefaultPDF(composition);
       }
       setPdfLinks(links);
@@ -86,7 +25,17 @@ const Compositions = () => {
     fetchPDFLinks();
   }, [compositions]);
 
-  // Function to get default PDF based on composition name
+  const getPDFDownloadURLFromStorage = async (composition) => {
+    const storageRef = ref(storage, `pdfs/${composition}.pdf`);
+    try {
+      const downloadURL = await getDownloadURL(storageRef);
+      return downloadURL;
+    } catch (error) {
+      console.error('Error getting PDF download URL from Storage: ', error);
+      return null;
+    }
+  };
+
   const getDefaultPDF = (composition) => {
     if (composition.includes('Teentaal')) {
       return TeentaalPDF;
@@ -101,13 +50,17 @@ const Compositions = () => {
     }
   };
 
-  const onSubmitComposition = async(newCompositionName, newPDFLink) => {
-    try{
-      await addDoc(PDFref, {composition: newCompositionName, downloadURL: newPDFLink , userID: auth?.currentUser?.uid})
-    }catch(err){
-      console.error(err)
+  const onSubmitComposition = async (newCompositionName, newPDFLink) => {
+    try {
+      // Assuming newPDFLink is a file reference or URL to the PDF file
+      const storageRef = ref(storage, `pdfs/${newCompositionName}.pdf`);
+      const fileSnapshot = await fetch(newPDFLink).then((res) => res.blob());
+      await uploadBytes(storageRef, fileSnapshot); // Uploading file to Firebase Storage
+
+    } catch (error) {
+      console.error('Error uploading file:', error);
     }
-  }
+  };
 
   return (
     <>
@@ -118,9 +71,13 @@ const Compositions = () => {
           <li key={index}>
             {composition} &nbsp;
             <button onClick={() => deleteComposition(index)}>Delete Composition</button>
-            <button onClick = {() => onSubmitComposition(composition, pdfLinks[composition])}> Store Composition </button>
+            <button onClick={() => onSubmitComposition(composition, pdfLinks[composition])}>
+              Store Composition
+            </button>
             <p>
-              <a href={pdfLinks[composition]} target="_blank" rel="noreferrer">Link To Composition</a>
+              <a href={pdfLinks[composition]} target="_blank" rel="noreferrer">
+                Link To Composition
+              </a>
             </p>
           </li>
         ))}
@@ -130,4 +87,3 @@ const Compositions = () => {
 };
 
 export default Compositions;
-

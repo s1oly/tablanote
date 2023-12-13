@@ -11,6 +11,7 @@ import { ref, getDownloadURL, uploadBytes} from 'firebase/storage';
 const Compositions = () => {
   const { compositions, deleteComposition } = useCompositions();
   const [pdfLinks, setPdfLinks] = useState({});
+  const [fileUpload, setFileUpload] = useState(null);
 
   useEffect(() => {
     const fetchPDFLinks = async () => {
@@ -51,10 +52,11 @@ const Compositions = () => {
   };
 
   const onSubmitComposition = async (newCompositionName, newPDFLink) => {
+    if(!fileUpload) return;
+    const storageRef = ref(storage, `pdfs/${newCompositionName}.pdf`);
+    const fileSnapshot = await fetch(newPDFLink).then((res) => res.blob());
     try {
       // Assuming newPDFLink is a file reference or URL to the PDF file
-      const storageRef = ref(storage, `pdfs/${newCompositionName}.pdf`);
-      const fileSnapshot = await fetch(newPDFLink).then((res) => res.blob());
       await uploadBytes(storageRef, fileSnapshot); // Uploading file to Firebase Storage
 
     } catch (error) {
@@ -69,15 +71,13 @@ const Compositions = () => {
       <ul>
         {compositions.map((composition, index) => (
           <li key={index}>
-            {composition} &nbsp;
+            <a href={pdfLinks[composition]} target="_blank" rel="noreferrer">{composition} </a> &nbsp;
             <button onClick={() => deleteComposition(index)}>Delete Composition</button>
-            <button onClick={() => onSubmitComposition(composition, pdfLinks[composition])}>
-              Store Composition
-            </button>
             <p>
-              <a href={pdfLinks[composition]} target="_blank" rel="noreferrer">
-                Link To Composition
-              </a>
+              <input type = "file" onChange={(e) => setFileUpload(e.target.files[0])}/>
+              <button onClick={() => onSubmitComposition(composition, pdfLinks[composition])}>
+                Store Composition
+              </button>
             </p>
           </li>
         ))}

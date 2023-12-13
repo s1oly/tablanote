@@ -5,7 +5,7 @@ import TeentaalPDF from '../../PDFs/TeentaalE.pdf'
 import JhaptaalPDF from '../../PDFs/JhaptaalE.pdf'
 import EktaalPDF from '../../PDFs/EktaalE.pdf'
 import RupakPDF from '../../PDFs/RupakE.pdf'
-import {db} from '../../Config/firebaseConfig'
+import {db, auth} from '../../Config/firebaseConfig'
 import {collection, addDoc} from 'firebase/firestore'
 
 
@@ -103,7 +103,7 @@ const Compositions = () => {
 
   const onSubmitComposition = async(newCompositionName, newPDFLink) => {
     try{
-      await addDoc(PDFref, {composition: newCompositionName, downloadURL: newPDFLink})
+      await addDoc(PDFref, {composition: newCompositionName, downloadURL: newPDFLink , userID: auth?.currentUser?.uid})
     }catch(err){
       console.error(err)
     }

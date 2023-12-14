@@ -9,7 +9,7 @@ import { storage } from '../../Config/firebaseConfig';
 import { ref, getDownloadURL, uploadBytes} from 'firebase/storage';
 
 const Compositions = () => {
-  const { compositions, deleteComposition } = useCompositions();
+  const {compositions, deleteComposition} = useCompositions();
   const [pdfLinks, setPdfLinks] = useState({});
   const [fileUpload, setFileUpload] = useState(null);
 
@@ -32,8 +32,8 @@ const Compositions = () => {
       const downloadURL = await getDownloadURL(storageRef);
       return downloadURL;
     } catch (error) {
-      console.error('Error getting PDF download URL from Storage: ', error);
-      return null;
+      console.error(error);
+      return null
     }
   };
 
@@ -51,13 +51,11 @@ const Compositions = () => {
     }
   };
 
-  const onSubmitComposition = async (newCompositionName, newPDFLink) => {
+  const onSubmitComposition = async (newCompositionName) => {
     if(!fileUpload) return;
     const storageRef = ref(storage, `pdfs/${newCompositionName}.pdf`);
-    const fileSnapshot = await fetch(newPDFLink).then((res) => res.blob());
     try {
-      // Assuming newPDFLink is a file reference or URL to the PDF file
-      await uploadBytes(storageRef, fileSnapshot); // Uploading file to Firebase Storage
+      await uploadBytes(storageRef, fileUpload); // Uploading file to Firebase Storage
 
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -75,7 +73,7 @@ const Compositions = () => {
             <button onClick={() => deleteComposition(index)}>Delete Composition</button>
             <p>
               <input type = "file" onChange={(e) => setFileUpload(e.target.files[0])}/>
-              <button onClick={() => onSubmitComposition(composition, pdfLinks[composition])}>
+              <button onClick={() => onSubmitComposition(composition)}>
                 Store Composition
               </button>
             </p>

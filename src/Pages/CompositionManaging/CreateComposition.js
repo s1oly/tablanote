@@ -9,6 +9,7 @@ const CreateComposition = () =>{
     const [name, setName] = useState('');
 
     const options = [
+      {label : "", value: ""},
       {label: "Teentaal", value: "Teentaal"},
       {label: "Jhaptaal", value: "Jhaptaal"},
       {label: "Ektaal", value: "Ektaal"},
@@ -47,7 +48,7 @@ const CreateComposition = () =>{
         <h2>Input Kayeda Details Below</h2>
         <br></br>
         <br></br>
-        <label> <b>Taal</b>&nbsp; 
+        <label> <b>Select a Taal</b>&nbsp; 
           {/* <input onChange={changeTaal} value={taal}></input> */}
           <select onChange = {changeTaal}>
             {options.map(option =>(

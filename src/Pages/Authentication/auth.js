@@ -1,53 +1,54 @@
-import { useState } from 'react'
-import {auth, googleProvider } from '../../Config/firebaseConfig'
-import {createUserWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth'
-
+import { useState, useEffect } from 'react';
+import { auth, googleProvider } from '../../Config/firebaseConfig';
+import { signInWithPopup, signOut } from 'firebase/auth';
+import './auth.css'; // Assuming Auth.css contains your CSS styles
 
 const Auth = () => {
+  const [user, setUser] = useState(null);
 
-    const [email, SetEmail] = useState("");
-    const [password, SetPassword] = useState(" ");
+  useEffect(() => {
+    // Subscribe to auth state changes to update user information
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in
+        setUser(user);
+      } else {
+        // No user is signed in
+        setUser(null);
+      }
+    });
 
-    const SignIn = async () => {
-        try {
-        await createUserWithEmailAndPassword(auth, email, password)
-        } catch (err) {
-            console.error(err)
-        }
-        
-    };
+    // Clean up subscription
+    return () => unsubscribe();
+  }, []);
 
-    const googleSignIn = async () => {
-        try {
-        await signInWithPopup(auth, googleProvider)
-        } catch (err) {
-            console.error(err)
-        }
-        
-    };
+  const googleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    const logout = async() => {
-        try {
-            await signOut (auth)
-            } catch (err) {
-                console.error(err)
-            }
-    };
+  const logout = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    return(
-        <div>
-            <input placeholder="Email" onChange={(e) => SetEmail(e.target.value)}/>
-            <p/>
-            <input placeholder="Password" type = 'password' onChange={(e) => SetPassword(e.target.value)}/>
-            <p/>
-            <button onClick={SignIn}>Sign In</button>
-            <p/>
-            <button onClick = {googleSignIn}>Sign in with Google</button>
-            <p/>
-            <button onClick = {logout}>Log Out</button>
-
-        </div>
-    )
-}
+  return (
+    <div>
+      {user && user.photoURL && (
+        <img className="profile-picture" src={user.photoURL} alt="Profile" />
+      )}
+      <p />
+      <button onClick={googleSignIn}>Sign in with Google</button>
+      <p />
+      {user && <button onClick={logout}>Log Out</button>}
+    </div>
+  );
+};
 
 export default Auth;

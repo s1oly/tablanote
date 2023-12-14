@@ -7,6 +7,13 @@ const CreateComposition = () =>{
     const [taal, setTaal] = useState('');
     const [bpm, setBpm] = useState('');
     const [name, setName] = useState('');
+
+    const options = [
+      {label: "Teentaal", value: "Teentaal"},
+      {label: "Jhaptaal", value: "Jhaptaal"},
+      {label: "Ektaal", value: "Ektaal"},
+      {label: "Rupak", value: "Rupak"}
+    ]
   
     const sayKayeda = () => {
       alert(taal + " " + bpm + " " + name);
@@ -41,13 +48,18 @@ const CreateComposition = () =>{
         <br></br>
         <br></br>
         <label> <b>Taal</b>&nbsp; 
-            <input onChange={changeTaal} value={taal}></input>
+          {/* <input onChange={changeTaal} value={taal}></input> */}
+          <select onChange = {changeTaal}>
+            {options.map(option =>(
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </select>
         </label>
-        <br></br>
+        <p></p>
         <label> <b>BPM</b>&nbsp; 
             <input onChange={changeBPM} value={bpm}></input>
         </label>
-        <br></br>
+        <p></p>
         <label> <b>Name</b>&nbsp; 
             <input onChange={changeName} value={name}></input>
         </label>

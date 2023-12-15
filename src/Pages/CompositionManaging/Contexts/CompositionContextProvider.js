@@ -14,11 +14,11 @@ import {ref, deleteObject} from 'firebase/storage'
         if (storedState) {
           setCompositions(JSON.parse(storedState));
         }
-      }, [compositions]);
+      }, []);
     
-      // useEffect(() => {
-      //   localStorage.setItem('compositions', JSON.stringify(compositions));
-      // }, [compositions]);
+      useEffect(() => {
+        localStorage.setItem('compositions', JSON.stringify(compositions));
+      }, [compositions]);
 
     const addNewComposition = (newComposition) => {
         setCompositions(compositions => compositions.concat(newComposition));

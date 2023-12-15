@@ -15,4 +15,4 @@ You may also see any lint errors in the console.
 
 Tablanote is a way to store tabla compositions online. 
 
-Version 1.00: Currently, only teentaal and jhaptaal are supported, however more taals will be available in the future 
+

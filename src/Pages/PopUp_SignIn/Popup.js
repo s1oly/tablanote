@@ -20,7 +20,7 @@ const Popup = () => {
             {isOpen && (
                 <div>
                     <div>
-                        <b>Welcome to TablaNote, a digital composition storage for the Tabla!</b>
+                        <b>Welcome to TablaNote, a digital composition storage for the Tabla! Sign in to get started.</b>
                     </div>
                     <button onClick={() => setIsOpen(false)}>
                         Close

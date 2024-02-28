@@ -50,7 +50,7 @@ const Home = () => {
                     <div className='toggle2'>
                         <h4>
                             Once you sign in, you will be shown your existing compositions. You can view them by pressing the link or create a new one based on the taal
-                            you want to play. Currently, only Teentaal,Jhaptaal,Ektaal, and Rupak are supported. After you make changes to your kayeda, download it with 
+                            you want to play. Currently, only Teentaal, Jhaptaal, Ektaal, and Rupak are supported. After you make changes to your kayeda, download it with 
                             the changes, naming it what you named the composition, and upload it to FireBase Storage. Then switching tabs should show you the updated 
                             composition.
                         </h4>
